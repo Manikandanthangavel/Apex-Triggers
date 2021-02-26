@@ -1,0 +1,25 @@
+public class today {
+    public static void man(Opportunity oppList)
+    {    
+     Opportunity o=oppList;
+        if(o.Amount>50000)
+        {
+     Account acc = [SELECT a.Id,a.is_goldenAccount__c FROM Account a WHERE a.Id =: o.AccountId];
+    
+       acc.is_goldenAccount__c=true;
+            update acc;
+       
+    }
+         else
+        { 
+            if(o.Amount<=50000)
+        {
+     Account atc = [SELECT a.Id,a.is_goldenAccount__c FROM Account a WHERE a.Id =: o.AccountId];
+    
+       atc.is_goldenAccount__c=false;
+            update atc;
+       }
+    
+}
+}
+}

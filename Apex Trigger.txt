@@ -1,0 +1,4 @@
+trigger woww on Opportunity (after insert, after update) {
+    Opportunity ot=Trigger.new[0];
+   today.man(ot);
+}
