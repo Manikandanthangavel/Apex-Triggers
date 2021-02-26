@@ -1,0 +1,31 @@
+@isTest
+public class TestClassOne {
+    @isTest
+    public static void testHandler(){
+        Account ac = new Account();
+        ac.name='mahesh';
+        insert ac;
+        id acntid = ac.id;
+        opportunity opp = new opportunity();
+        opp.name='maheshopp';
+        opp.stagename='Qualification';
+        opp.Amount=45362;
+        opp.CloseDate=Date.newInstance(2021,02,27);
+        opp.AccountId = acntid ;
+        insert opp;
+       // Test.startTest();        
+        //Account att = [SELECT Id, is_goldenAccount__c FROM Account WHERE Id =: acntid ];
+        //System.debug(att.is_goldenAccount__c );
+        //System.assertequals(False,att.is_goldenAccount__c );
+         //System.assertequals(False,att.is_goldenAccount__c );
+        //Test.stopTest();
+       opportunity op = [SELECT o.AccountId, o.Amount FROM Opportunity o WHERE o.AccountId =: acntid];
+        op.Amount=65748;
+        id mani=op.AccountId;
+        update op;
+         Test.startTest();        
+        Account at = [SELECT Id, is_goldenAccount__c FROM Account WHERE Id =: mani ];
+        System.assertequals(True,at.is_goldenAccount__c );
+         Test.stopTest();
+    }
+}
